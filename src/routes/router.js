@@ -1,18 +1,32 @@
-import React from 'react'
-import { Router, Route, Redirect } from 'react-router'
+import React ,{Component}from 'react'
+import { Router, Route, Redirect ,IndexRoute} from 'react-router'
+import App from '@/containers/app'
 
-const moduleRoute  = require.context('../containers', true, /^/((?!\/)[\s\S])+\/index\.js$/) //获取view视图下，所有router文件
+const moduleRoute  = require.context('../containers', true, /^\.\/\S+\/router\/index\.js$/) //获取view视图下，所有router文件
+
+class Root extends Component {
+    render() {
+        return (
+            <div>
+              {this.props.children}
+            </div>
+        );
+    }
+}
 const router = store => {
-    return <Router>
-                <Route path="/">
+    return <Route path="/" component={Root}>
+                <IndexRoute component={App} />
                     {
                         moduleRoute.keys().map(key => {
                             return moduleRoute(key).default(store)
                         })
                     }
                     <Redirect from='*' to='/'  />
-                </Route>
-            </Router>
-}
 
+            </Route>
+                
+                
+                
+            
+}
 export default router
