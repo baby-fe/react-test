@@ -1,65 +1,59 @@
-export default const service = (url, option = {})=>{
+const formDataCode = (data)=>{
+    let str = '';
+    for(let i in data){
+      if(data.hasOwnProperty(i)){
+        str = str + i +"=" +data[i] + '&';
+      }
+    }
+    return str;
+  }
 
-	const formDataCode = (data)=>{
-		let str = '';
-		for(let i in data){
-			if(data.hasOwnProperty(i)){
-				str = str + i +"=" +data[i] + '&';
-			}
-		}
-	}
+  // const callback = (res)=>{
+  //   res.json().then(response=>{
+  //     if(!response){
+  //       throw '服务器返回参数错误'
+  //     }
+  //     return response;
+  //   })
+  // }
 
-	const callback = (res)=>{
-		res.json().then(response=>{
-			if(!response){
-				throw '服务器返回参数错误'
-			}
-			return response;
-		})
-	}
+  // const errHandle = (res)=>{
+  //   if(res.errcode == -1){
+  //     alert(res.errmsg)
+  //   }
+  // }
 
-	const errHandle = (res)=>{
-		if(res.errcode == -1){
-			alert(res.errmsg)
-		}
-	}
+let param = {},
+param.method = 'get'
+param.cache = 'reload';
+param.mode = 'same-origin';
 
-	let param = {},
-	method = option.method || 'get'
-	data = option.data || {};
+export const request = (url, data, option = {}) => {
+  data = data || {};
 	swicth (method){
 		case 'get':
-			url = url + (data ? '?' +formDataCode(data) : '');
+			return get(url,data,{...param,...option});
 			break;
 		case 'post':
-			params.headers= {};
-			params.body = formDataCode(data);
-			params.header['Content-Type' ] = "application/x-www-form-urlencoded; charset=UTF-8";
+			return post(url,data,{...param,...option});
 			break;
 		default:
+      return get(url,data,{...param,...option});
 			break;
 	}
-	param.cache = 'reload';
-	param.mode = 'same-origin';
-	return fetch(url,params).then(callback).catch(errHandle);
+	
 }
 
 //todo
-const get = function(url, params, headers) {
-  if (params) {
-    let paramsArray = [];
-    //encodeURIComponent
-    Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]))
-    if (url.search(/\?/) === -1) {
-      url += '?' + paramsArray.join('&')
-    } else {
-      url += '&' + paramsArray.join('&')
-    }
+export const get = (url, data, option = {}) => {
+  if (data) {
+    url = url+'?'+formDataCode(data)
   }
   return new Promise(function (resolve, reject) {
    fetch(url, {
-      method: 'GET',
-      headers: headers,
+      ...param
+      ...option,
+      method: 'GET'
      })
      .then((response) => {
        if (response.ok) {
@@ -67,34 +61,31 @@ const get = function(url, params, headers) {
        } else {
          reject({status:response.status})
        }
-     })
-     .then((response) => {
+     }).then((response) => {
        resolve(response);
-     })
-     .catch((err)=> {
+     }).catch((err)=> {
       reject({status:-1});
      })
   })
 }
 
-const post = function(url, formData, headers) {
+export const post = (url, data, option = {}) => {
   return new Promise(function (resolve, reject) {
    fetch(url, {
+      ...param,
+      ...option,
       method: 'POST',
-      headers: headers,
-      body:formData,
-     })
-     .then((response) => {
+      headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
+      body:formDataCode(data),
+     }).then((response) => {
        if (response.ok) {
          return response.json();
        } else {
          reject({status:response.status})
        }
-     })
-     .then((response) => {
+     }).then((response) => {
        resolve(response);
-     })
-     .catch((err)=> {
+     }).catch((err)=> {
       reject({status:-1});
      })
   })
