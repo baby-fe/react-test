@@ -1,11 +1,11 @@
-const initState = { value: 'value' }
-export default (state = initState, action) => {
-	console.log('action:',action.type)
+import {DOADD} from './constant'
+
+export default (state = {}, action) => {
 	switch (action.type){
-		case 'edit':
+		case DOADD:
 			return {
 				...state,
-				tt:action.val
+				tt:action.val+(state.tt||0)
 				}
 		default:
 			return state;

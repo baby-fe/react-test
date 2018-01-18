@@ -7,7 +7,7 @@ const resetReducerCreater = (reducer, resetState) => (state, action) => {
 		return reducer(state, action);
 	}
 }
-
+//store增强器，路由切换时重置store
 const reset = (createStore) => (reducer, preloadedState, enhancer) => {
 	const store = createStore(reducer, preloadedState, enhancer);
 

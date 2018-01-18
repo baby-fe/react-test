@@ -1,4 +1,6 @@
+import {DOADD} from './constant'
+
 export const strEdit = (str) => ({
-	type: 'edit',
+	type: DOADD,
 	val: str
 });

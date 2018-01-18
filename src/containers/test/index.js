@@ -1,26 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {strEdit} from './redux/action'
+import {STATE_KEY} from './redux/constant'
 
 class Test extends Component {
 
 	constructor(props){
 		super(props)
 		this.state = {...props}
-		console.log('props:',props)
-		console.log('state:',this.state)
-		// const { store } = this.context;
-		// console.log('store:',store)
-
 	}
 
 	componentDidMount() {
-	    // const { store } = this.context;
-	    // console.log('store:',store)
 	}
     render() {
-        const  value  = this.state.tt;
-        console.log(value)
+        const  value  = this.props.tt;
+        console.log('this.state:',this.props)
         return <div>
         			<span>sdfsdf</span>
         			<h1 onClick={this.state.edit}>{ value }</h1>
@@ -30,20 +24,16 @@ class Test extends Component {
 }
 
 const mapStateToProps = state => {
-	console.log('state:',state)
     return {
-    	tt: typeof state
+    	tt: state[STATE_KEY].tt||0
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-	const {
-		tt
-	} = ownProps;
-	const str = tt+1
+	
+	const str = 1
 	return {
 		edit: () => {
-			console.log('in')
 			dispatch(strEdit(str))
 		}
 	}
