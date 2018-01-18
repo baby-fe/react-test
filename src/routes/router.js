@@ -1,5 +1,5 @@
 import React ,{Component}from 'react'
-import { Router, Route, Redirect ,IndexRoute} from 'react-router'
+import {Route, Redirect ,IndexRoute} from 'react-router'
 import App from '@/containers/app'
 
 const moduleRoute  = require.context('../containers', true, /^\.\/\S+\/router\/route\.js$/) //获取view视图下，所有router文件
@@ -24,9 +24,5 @@ const router = store => {
                     <Redirect from='*' to='/'  />
 
             </Route>
-                
-                
-                
-            
 }
 export default router

@@ -1,7 +1,6 @@
 import { applyMiddleware, compose, createStore ,combineReducers} from 'redux'
 import { routerMiddleware,routerReducer  } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
-import { makeRootReducer } from '@/reducers/reducer'
 import resetEnhancer from '../enhancer/reset.js';
 
 export default (initialState = {}, history) => {
