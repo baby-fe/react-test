@@ -21,7 +21,7 @@ class Test extends Component {
         			<span>sdfsdf</span>
         			<Link to="/test/inner/lius"><h2>to-test/inner</h2></Link>
         			<h1 onClick={this.state.edit}>{ value }</h1>
-        			<button onClick={this.state.print()} className="btn">print aync</button>
+        			<button onClick={this.state.print} className="btn">print aync</button>
         		</div>
         		
     }
@@ -40,8 +40,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 		edit: () => {
 			dispatch(strEdit(str))
 		},
-		print:(data) => {
+		print:() => {
 			dispatch(getData({page:0,pageCount:10}))
+			// getData({page:0,pageCount:10})
 		}
 	}
 }
