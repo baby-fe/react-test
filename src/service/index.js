@@ -5,6 +5,7 @@ const formDataCode = (data)=>{
         str = str + i +"=" +data[i] + '&';
       }
     }
+    str = str.slice(0, str.length-1)
     return str;
   }
 
@@ -22,36 +23,35 @@ const formDataCode = (data)=>{
   //     alert(res.errmsg)
   //   }
   // }
-
-let param = {},
+const API_PATH = '/api'
+let param = {}
 param.method = 'get'
 param.cache = 'reload';
 param.mode = 'same-origin';
 
 export const request = (url, data, option = {}) => {
   data = data || {};
-	swicth (method){
+  url = API_PATH + url;
+	switch (option&&option.method){
 		case 'get':
 			return get(url,data,{...param,...option});
-			break;
 		case 'post':
 			return post(url,data,{...param,...option});
-			break;
 		default:
       return get(url,data,{...param,...option});
-			break;
 	}
 	
 }
 
 //todo
 export const get = (url, data, option = {}) => {
+  url = API_PATH + url;
   if (data) {
     url = url+'?'+formDataCode(data)
   }
   return new Promise(function (resolve, reject) {
    fetch(url, {
-      ...param
+      ...param,
       ...option,
       method: 'GET'
      })
@@ -64,12 +64,14 @@ export const get = (url, data, option = {}) => {
      }).then((response) => {
        resolve(response);
      }).catch((err)=> {
+      console.log('err:',err)
       reject({status:-1});
      })
   })
 }
 
 export const post = (url, data, option = {}) => {
+  url = API_PATH + url;
   return new Promise(function (resolve, reject) {
    fetch(url, {
       ...param,
@@ -86,6 +88,7 @@ export const post = (url, data, option = {}) => {
      }).then((response) => {
        resolve(response);
      }).catch((err)=> {
+      console.log('err:',err)
       reject({status:-1});
      })
   })

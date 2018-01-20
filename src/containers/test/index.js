@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {strEdit} from './redux/action'
+import {strEdit,getData} from './redux/action'
 import {STATE_KEY} from './redux/constant'
+import { Link } from 'react-router'
+import './test.less'
 
 class Test extends Component {
 
@@ -17,7 +19,9 @@ class Test extends Component {
         console.log('this.state:',this.props)
         return <div>
         			<span>sdfsdf</span>
+        			<Link to="/test/inner/lius"><h2>to-test/inner</h2></Link>
         			<h1 onClick={this.state.edit}>{ value }</h1>
+        			<button onClick={this.state.print()} className="btn">print aync</button>
         		</div>
         		
     }
@@ -35,6 +39,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 	return {
 		edit: () => {
 			dispatch(strEdit(str))
+		},
+		print:(data) => {
+			dispatch(getData({page:0,pageCount:10}))
 		}
 	}
 }
