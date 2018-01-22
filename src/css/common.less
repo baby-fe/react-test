@@ -1,0 +1,63 @@
+//common
+.none { display: none }
+.block { display: block; }
+.flex { display: flex; -webkit-display:flex; }
+.linebk{ display: inline-block; }
+
+.box { box-sizing: border-box;}
+
+.abs { position: absolute; }
+.rela { position: relative; }
+.fixed { position: fixed; }
+
+.fl { float: left; }
+.fr { float: right; }
+
+//横线样式
+.line_ver_style(@margin,@color){
+	display: block;
+	margin: 0 @margin;
+	height: 1px;
+	background-color: @color;
+}
+
+//竖线样式
+.line_hor_style(@margin,@color){
+	display: block;
+	margin: @margin 0;
+	width: 1px;
+	background-color: @color;
+}
+
+//背景样式
+.bg_style(@url){
+	background: url(@url) no-repeat;
+	background-size: 100%;
+}
+
+//上下左右箭头
+.arrow_mixin(@dir) when (@dir='up') {
+	transform: rotate(-135deg);
+	-webkit-transform: rotate(-135deg);
+}
+.arrow_mixin(@dir) when (@dir='down') {
+	transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+}
+.arrow_mixin(@dir) when (@dir='left') {
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+}
+.arrow_mixin(@dir) when (@dir='right') {
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+}
+
+.arrow_style(@direction: 'right',@thickness: 2px,@size: .18rem,@color: #000000){
+	display: block;
+	width: @size;
+	height: @size;
+	border-bottom: @thickness solid @color;
+	border-right: @thickness solid @color;
+	.arrow_mixin(@direction);
+}

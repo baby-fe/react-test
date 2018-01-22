@@ -13,7 +13,7 @@ const saveData = (url,par) => ({
 });
 
 export const getData = (par) => (dispatch, getState) => {
-	post('/ygg-hqbs/cpsfavorites/list?storeOwnerId=&isManage=0').then(res => {
+	post('/ygg-hqbs/homePage/greateSale30').then(res => {
 		console.log("res:",res)
 	})
 } 
