@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{Fragment} from 'react'
 import { combineReducers } from 'redux'
 import { Route } from 'react-router'
 import nReducer from '../redux/reducer'
@@ -26,9 +26,9 @@ const innerLoader = (store, nextState, cb) => {
 }
 
 export default store => {
-    return <React.Fragment key={Math.random()}>
+    return <Fragment key={Math.random()}>
     		<Route key='_test' path='/test' getComponent={(nextState, cb) => {testLoader(store, nextState, cb)}}/>
     		<Route key='_test_inner' path='/test/inner/:name' getComponent={(nextState, cb) => {innerLoader(store, nextState, cb)}}/>
-    	</React.Fragment>
+    	</Fragment>
 
 }

@@ -11,24 +11,16 @@ const loader = (store, nextState, cb, module) => {
         cb(null, module.default);
 }
 //异步加载test模块，重置store
-const testLoader = (store, nextState, cb) => {
+const homeLoader = (store, nextState, cb) => {
     /* webpackChunkName: 'Test' */
     import('../index').then(module => {
         loader(store, nextState, cb, module)
     })
 }
 
-const innerLoader = (store, nextState, cb) => {
-    /* webpackChunkName: 'Test' */
-    import('../inner').then(module => {
-        loader(store, nextState, cb, module)
-    })
-}
+
 
 export default store => {
-    return <React.Fragment key={Math.random()}>
-    		<Route key='_test' path='/test' getComponent={(nextState, cb) => {testLoader(store, nextState, cb)}}/>
-    		<Route key='_test_inner' path='/test/inner/:name' getComponent={(nextState, cb) => {innerLoader(store, nextState, cb)}}/>
-    	</React.Fragment>
+    return <Route key='_home' path='/home' getComponent={(nextState, cb) => {homeLoader(store, nextState, cb)}}/>
 
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {strEdit,getData} from './redux/action'
 import {STATE_KEY} from './redux/constant'
 import { Link } from 'react-router'
+import { auth } from '@/utils/hoc'
 import './test.less'
 
 class Test extends Component {
@@ -51,4 +52,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 //   store: React.PropTypes.object
 // }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Test);
+export default connect(mapStateToProps, mapDispatchToProps)(auth(Test));
