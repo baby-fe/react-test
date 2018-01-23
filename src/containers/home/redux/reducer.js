@@ -1,11 +1,11 @@
-import {DOADD} from './constant'
+import {HOME} from './constant'
 
 export default (state = {}, action) => {
 	switch (action.type){
-		case DOADD:
+		case HOME:
 			return {
 				...state,
-				tt:action.val+(state.tt||0)
+				homm:11
 				}
 		default:
 			return state;

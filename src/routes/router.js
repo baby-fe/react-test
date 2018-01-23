@@ -1,6 +1,6 @@
 import React ,{Component}from 'react'
 import {Route, Redirect ,IndexRoute} from 'react-router'
-import App from '@/containers/app'
+import Home from '@/containers/home'
 
 const moduleRoute  = require.context('../containers', true, /^\.\/\S+\/router\/route\.js$/) //获取view视图下，所有router文件
 
@@ -15,7 +15,7 @@ class Root extends Component {
 }
 const router = store => {
     return <Route path="/" component={Root}>
-                <IndexRoute component={App} />
+                <IndexRoute component={Home} />
                     {
                         moduleRoute.keys().map(key => {
                             return moduleRoute(key).default(store)

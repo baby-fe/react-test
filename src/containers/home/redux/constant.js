@@ -1,3 +1,3 @@
-export const STATE_KEY = 'test'
+export const STATE_KEY = 's_home'
 
-export const DOADD = 'doadd'
+export const HOME = 'home'
