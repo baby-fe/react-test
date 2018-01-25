@@ -55,3 +55,4 @@ export const get = (url, data, option = {}) => {
 export const post = (url, data, option = {}) => {
   return request(url,data,{...option,method:'post'});
 }
+//for simple demo, update with redux-saga||redux-observable

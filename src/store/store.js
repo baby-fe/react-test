@@ -1,9 +1,17 @@
-import { applyMiddleware, compose, createStore ,combineReducers} from 'redux'
+import { applyMiddleware, compose, createStore } from 'redux'
 import { routerMiddleware,routerReducer  } from 'react-router-redux'
 import thunkMiddleware from 'redux-thunk'
+import {
+  combineReducers
+} from 'redux-immutable';
+import Immutable from 'immutable';
 import resetEnhancer from '../enhancer/reset.js';
-
-export default (initialState = {}, history) => {
+/**
+ * @param  {state}
+ * @param  {history}
+ * @return {store}
+ */
+export default (initialState, history) => {
 
     // const asyncReducers  = require.context('../containers', true, /^\.\/\S+\/redux\/reducer\.js$/)
     // console.log('reds:',asyncReducers)
@@ -20,7 +28,7 @@ export default (initialState = {}, history) => {
     )
     const store = createStore(
         combineReducers(originalReducers),
-        initialState,
+        Immutable.Map({}),
         storeEnhancers
     );
     console.log('originalReducers:',originalReducers)
