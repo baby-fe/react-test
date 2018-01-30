@@ -1,5 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {getData} from '../actions/action-home'
+import {selectorHome} from '../selectors'
 import { Link } from 'react-router'
+import { auth ,qq} from '@/utils/hoc'
+import './test.less'
 
 export class Home extends Component {
 
@@ -10,6 +15,10 @@ export class Home extends Component {
 
 	componentDidMount() {
 	}
+
+    componentWillMount(){
+        // this.state
+    }
     render() {
         return <div>
         			<span>home</span>
@@ -19,5 +28,13 @@ export class Home extends Component {
     }
 }
 
-export default Home
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        getHomeInfo:() => {
+            dispatch(getData())
+        }
+    }
+}
+
+export default connect(selectorHome, mapDispatchToProps)(Home);
 

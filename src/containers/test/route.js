@@ -1,27 +1,27 @@
 import React,{Fragment} from 'react'
 import { combineReducers } from 'redux'
 import { Route } from 'react-router'
-import nReducer from '../redux/reducer'
-import { STATE_KEY } from '../redux/constant'
+import { reducerTest, reducerTestInner } from '../reducers'
+import { key_test key_test_inner} from '../redux/constant'
 
-const loader = (store, nextState, cb, module) => {
-	const originState = store.getState()
-    const newStore = originState[STATE_KEY] ? {...originState} : {...originState,[STATE_KEY]: {}}
-    store.reset(combineReducers({...store._reducers,[STATE_KEY]: nReducer}), newStore)
+const loader = (store, nextState, cb, module, key, rdcr) => {
+    const originState = store.getState()
+    const newStore = originState[key] ? {...originState} : {...originState,[key]: {}}
+    store.reset(combineReducers({...store._reducers,[key]: rdcr}), newStore)
         cb(null, module.default);
 }
 //异步加载test模块，重置store
 const testLoader = (store, nextState, cb) => {
     /* webpackChunkName: 'Test' */
     import('../index').then(module => {
-        loader(store, nextState, cb, module)
+        loader(store, nextState, cb, module, key_test, reducerTest)
     })
 }
 
 const innerLoader = (store, nextState, cb) => {
     /* webpackChunkName: 'Test' */
     import('../inner').then(module => {
-        loader(store, nextState, cb, module)
+        loader(store, nextState, cb, module, key_test_inner, reducerTestInner)
     })
 }
 

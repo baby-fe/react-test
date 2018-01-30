@@ -2,7 +2,7 @@ import React ,{Component}from 'react'
 import {Route, Redirect ,IndexRoute} from 'react-router'
 import Home from '@/containers/home'
 
-const moduleRoute  = require.context('../containers', true, /^\.\/\S+\/router\/route\.js$/) //获取view视图下，所有router文件
+const moduleRoute  = require.context('../containers', true, /^\.\/\S+\/route\.js$/) //获取view视图下，所有router文件
 
 class Root extends Component {
     render() {
