@@ -1,1 +1,1 @@
-export const getData = 'GET_DATA'
+export const press = 'PRESS'

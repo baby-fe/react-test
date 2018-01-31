@@ -1,13 +1,14 @@
 import React from 'react'
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux-immutable'
+import Immutable from 'immutable';
 import { Route } from 'react-router'
-import { reducerHome } from '../reducers'
-import { key_home } from '@/constant'
+import reducerHome from './reducers/reducer-home'
+import { key_home } from '@/constants'
 
 const loader = (store, nextState, cb, module, key, rdcr) => {
-	const originState = store.getState()
-    const newStore = originState[key] ? {...originState} : {...originState,[key]: {}}
-    store.reset(combineReducers({...store._reducers,[key]: rdcr}), newStore)
+    const originState = store.getState()
+    const newState = originState.get(key) ? originState : originState.set(key,Immutable.Map({}))
+    store.reset(combineReducers({...store._reducers,[key]: rdcr}), newState)
         cb(null, module.default);
 }
 //异步加载test模块，重置store

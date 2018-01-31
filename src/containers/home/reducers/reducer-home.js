@@ -1,4 +1,4 @@
-import {getData} from './actionType'
+import {getData} from '../actionType'
 import {
   createReducer
 } from 'redux-create-reducer';

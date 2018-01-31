@@ -1,4 +1,4 @@
-import {getData} from './actionType'
+import {press} from '../actionType'
 import {
   createReducer
 } from 'redux-create-reducer';
@@ -6,11 +6,11 @@ import Immutable from 'immutable';
 
 const initialState = Immutable.fromJS([]);
 
-const initHome = (domain, action) => {
-  return domain
-    .merge(action.data);
+const add = (domain, action) => {
+	console.log(action)
+  return domain;
 };
 
 export default createReducer(initialState, {
-  [getData]:initHome
+  [press]:add
 });

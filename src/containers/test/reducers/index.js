@@ -1,5 +1,5 @@
-import reducerHome from './reducer-home';
+import reducerTest from './reducer-test';
 
 export default {
-  reducerHome
+  reducerTest
 };

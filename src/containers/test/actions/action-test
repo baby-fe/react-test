@@ -1,9 +1,0 @@
-import {getData} from './actionType'
-import Immutable from 'immutable';
-import {post} from '@/service'
-
-export const getData = (par) => (dispatch, getState) => {
-	post('/ygg-hqbs/homePage/greateSale30').then(res => {
-		console.log("res:",res)
-	})
-}   

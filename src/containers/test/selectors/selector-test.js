@@ -1,16 +1,14 @@
 import {
   createSelector
 } from 'reselect';
-import { key_home } from '@/constant'
+import { key_test } from '@/constant'
 
-const homeSelector = (state) => {
-  return state.get(key_home);
+const testSelector = (state) => {
+  return state.get(key_test);
 };
 
-const bannerSelector = createSelector([homeSelector], (immu_home) => {
-  return immu_home.filter((data) => {
-    return data.get('bannerList');
-  });
+const bannerSelector = createSelector([testSelector], (immu_test) => {
+  return immu_test
 });
 
 export default (state) => {

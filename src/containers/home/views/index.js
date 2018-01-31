@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {getData} from '../actions/action-home'
-import {selectorHome} from '../selectors'
+import {getDetail} from '../actions/action-home'
+import selectorHome from '../selectors/selector-home'
 import { Link } from 'react-router'
 import { auth ,qq} from '@/utils/hoc'
 import './test.less'
@@ -23,6 +23,7 @@ export class Home extends Component {
         return <div>
         			<span>home</span>
         			<Link to="/test"><h2>to-test</h2></Link>
+                    <button onClick={this.state.getHomeInfo}>get_data</button>
         		</div>
         		
     }
@@ -31,7 +32,7 @@ export class Home extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getHomeInfo:() => {
-            dispatch(getData())
+            dispatch(getDetail())
         }
     }
 }
