@@ -1,9 +1,14 @@
-import {getData} from '../actionType'
+import {getData,getPros} from '../actionType'
 import Immutable from 'immutable';
 import {post} from '@/service'
 
 export const home = (res) => ({
 	type: getData,
+	data: Immutable.fromJS(res)
+});
+
+export const products = (res) => ({
+	type: getPros,
 	data: Immutable.fromJS(res)
 });
 
@@ -13,3 +18,9 @@ export const getDetail = (par) => (dispatch, getState) => {
 		dispatch(home(res));
 	})
 } 
+
+export const getProducts = (par) => (dispatch, getState) => {
+	post('/ygg-hqbs/homePage/recommend').then(res => {
+		dispatch(products(res));
+	})
+}
