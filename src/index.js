@@ -6,6 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import createStore from './store'
 import router from './router'
 import FastClick from 'fastclick'
+import './css/reset.less'
 
 // 全局处理移动端 onclick 事件的延迟 300 ms 问题
 FastClick.attach(document.body)

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ReactSwipe from 'react-swipe'
+import { Link } from 'react-router'
+import Swiper from '@/components/swiper'
+import Footer from '@/components/footer'
 import {getDetail, getProducts} from '../actions/action-home'
 import selectorHome from '../selectors/selector-home'
-import { Link } from 'react-router'
-import { auth ,qq} from '@/utils/hoc'
+import { expansion } from '@/utils/hoc'
 import style from './home.less'
 
 export class Home extends Component {
@@ -13,6 +14,7 @@ export class Home extends Component {
 		super(props)
 		this.state = {...props}
         console.log('style:',style)
+        this.handleSwiperClick = this.handleSwiperClick.bind(this)
 	}
 
 	componentDidMount() {
@@ -24,48 +26,26 @@ export class Home extends Component {
         // this.state
         this.state.getHomeInfo()
     }
-    setSwipesOps(){
-        // swipes 的配置
-        return {
-            distance: 620, // 每次移动的距离，卡片的真实宽度
-            currentPoint: 1,// 初始位置，默认从0即第一个元素开始
-            autoPlay: true, // 是否开启自动播放
-            swTouchstart: (ev) => {
-
-            },
-            swTouchmove: (ev) => {
-
-            },
-            swTouchend: (ev) => {
-                let data = {
-                    moved: ev.moved,
-                    originalPoint: ev.originalPoint,
-                    newPoint: ev.newPoint,
-                    cancelled: ev.cancelled
-                }
-                console.log(data);
-                this.setState({
-                    curCard: ev.newPoint
-                })
-            }
-        }
+    handleSwiperClick(){
+        console.log('his:',this.props.rHistory)
     }
 
     render() {
         if(this.props.products.size<=0){
             return null
         }
-        return <div>
-                <ReactSwipe className="carousel" swipeOptions={{continuous: false}}>
+        return <div className={style.home}>
+                <Swiper opts={{continuous: false,pagination:true,sum:this.props.products.size}}>
                     {
                         this.props.products.map((item,index) => {
-                            return <div key={item.getIn(['product','productId'])}><img className={style.bannerImg} src={item.getIn(['product','image'])}></img></div>
+                            return <div key={item.getIn(['product','productId'])}><img alt="" className={style.bannerImg} src={item.getIn(['product','image'])} onClick={this.handleSwiperClick}></img></div>
                         })
                         
                     }
-                </ReactSwipe>
+                </Swiper>
         			<span className={style.btn}>home</span>
-        			<Link className={style.bannerImg} to="/test"><h2>to-test</h2></Link>
+        			<Link to="/test"><h2>to-test</h2></Link>
+                    <Footer page={1}></Footer>
         		</div>
         		
     }
@@ -80,5 +60,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(selectorHome, mapDispatchToProps)(Home);
+export default connect(selectorHome, mapDispatchToProps)(expansion(Home));
 

@@ -33,7 +33,6 @@ export default (initialState, history) => {
     // const enhancers = [];
     const storeEnhancers = compose(resetEnhancer, applyMiddleware(...middleware), (window && window.devToolsExtension) ? window.devToolsExtension() : (f) => f)
     const store = createStore(combineReducers(originalReducers), Immutable.Map({}), storeEnhancers);
-    console.log('originalReducers:', originalReducers)
     store._reducers = originalReducers;
     return store;
 }

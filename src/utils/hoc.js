@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { hashHistory,browserHistory } from 'react-router'
+
+const history = process.env.NODE_ENV !== 'production' ? browserHistory : hashHistory;
 
 export const auth = (WrappedComp) => {
-	console.log('authinit')
   return class Auth extends Component {
     render(){
       console.log('auth:',this.props)
@@ -12,12 +14,21 @@ export const auth = (WrappedComp) => {
 
 //反向继承，渲染劫持
 export const qq = (WrappedComp) => {
-	console.log('qqinit')
   return class Qq extends WrappedComp {
     render(){
       console.log('qq:',this.props)
-      const newp = {...this.props,qq:'qqq'}
       return super.render();
+    }
+  }
+}
+
+
+export const expansion = (WrappedComp) => {
+  
+  return class Expansion extends Component {
+    render(){
+      let props = Object.assign({},this.props,{rHistory:history})
+      return <WrappedComp {...props}/>
     }
   }
 }
