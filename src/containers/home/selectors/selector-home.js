@@ -3,9 +3,10 @@ import {
 } from 'reselect';
 import Immutable from 'immutable';
 import { key_home } from '@/constants'
+import { commonLoginSelector } from '@/common/selectors'
 
-const homeSelector = (state) => {
-  return state.get(key_home);
+const homeSelector = (immu_state) => {
+  return immu_state.get(key_home);
 };
 
 const bannerSelector = createSelector([homeSelector], (immu_home) => {
@@ -16,9 +17,10 @@ const proSelector = createSelector([homeSelector], (immu_home) => {
   return immu_home&&immu_home.getIn(['products','recommendList'])
 });
 
-export default (state) => {
+export default (immu_state) => {
   return {
-    banners: bannerSelector(state) || Immutable.Map({}),
-    products: proSelector(state) || Immutable.Map({})
+  	__state_login: commonLoginSelector(immu_state),
+    banners: bannerSelector(immu_state) || Immutable.Map({}),
+    products: proSelector(immu_state) || Immutable.Map({}),
   };
 };

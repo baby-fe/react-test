@@ -2,33 +2,46 @@ import React, { Component } from 'react'
 import { hashHistory,browserHistory } from 'react-router'
 
 const history = process.env.NODE_ENV !== 'production' ? browserHistory : hashHistory;
+/**
+ * compose functions from left
+ * @param  {Array}
+ * @param  {Component}
+ * @return {Component}
+ */
+export const compose = (fns, component) => {
+  return fns.reduce((item, fn) => {return fn(item)}, component);
+}
 
+/**
+ * 反向继承，渲染劫持
+ * @param  {Component}
+ * @return {Component}
+ */
 export const auth = (WrappedComp) => {
-  return class Auth extends Component {
+  return class Auth extends WrappedComp {
     render(){
       console.log('auth:',this.props)
-      return <WrappedComp {...this.props}/>
+      if(!this.props.__state_login) {
+        return history.push(`/login`)
+      } else {
+        return super.render();
+      }
     }
   }
 }
 
-//反向继承，渲染劫持
-export const qq = (WrappedComp) => {
-  return class Qq extends WrappedComp {
-    render(){
-      console.log('qq:',this.props)
-      return super.render();
-    }
-  }
-}
-
-
-export const expansion = (WrappedComp) => {
-  
-  return class Expansion extends Component {
-    render(){
-      let props = Object.assign({},this.props,{rHistory:history})
-      return <WrappedComp {...props}/>
+/**
+ * 属性代理，扩充属性
+ * @param  {Object}
+ * @return {Function}
+ */
+export const expansion = (extraProps = {}) => {
+  return (WrappedComp) => {
+    return class Expansion extends Component {
+      render(){
+        let props = Object.assign({},this.props,{...extraProps, history:history})
+        return <WrappedComp {...props}/>
+      }
     }
   }
 }

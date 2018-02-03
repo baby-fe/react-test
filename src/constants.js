@@ -13,3 +13,8 @@ export const key_test = '@s_test'
  * @type {String}
  */
 export const key_test_inner = '@s_test_inner'
+/**
+ * 登录页
+ * @type {String}
+ */
+export const key_login = '@s_login'

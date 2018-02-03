@@ -5,7 +5,7 @@ import Swiper from '@/components/swiper'
 import Footer from '@/components/footer'
 import {getDetail, getProducts} from '../actions/action-home'
 import selectorHome from '../selectors/selector-home'
-import { expansion } from '@/utils/hoc'
+import { expansion, auth, compose } from '@/utils/hoc'
 import style from './home.less'
 
 export class Home extends Component {
@@ -27,10 +27,11 @@ export class Home extends Component {
         this.state.getHomeInfo()
     }
     handleSwiperClick(){
-        console.log('his:',this.props.rHistory)
+        console.log('his:',this.props.history)
     }
 
     render() {
+        console.log('this.props:',this.props)
         if(this.props.products.size<=0){
             return null
         }
@@ -40,7 +41,6 @@ export class Home extends Component {
                         this.props.products.map((item,index) => {
                             return <div key={item.getIn(['product','productId'])}><img alt="" className={style.bannerImg} src={item.getIn(['product','image'])} onClick={this.handleSwiperClick}></img></div>
                         })
-                        
                     }
                 </Swiper>
         			<span className={style.btn}>home</span>
@@ -60,5 +60,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-export default connect(selectorHome, mapDispatchToProps)(expansion(Home));
+export default compose([auth, expansion(),connect(selectorHome, mapDispatchToProps)],Home);
 

@@ -15,7 +15,11 @@ import Immutable from 'immutable';
 import resetEnhancer from './enhancer/reset.js';
 import reducerHome from '@/containers/home/reducers/reducer-home'
 import {
-    key_home
+    reducerLogin
+} from '@/common/reducers'
+import {
+    key_home,
+    key_login
 } from '@/constants'
 /**
  * @param  {state}
@@ -28,11 +32,12 @@ export default (initialState, history) => {
     const middleware = [thunkMiddleware, routerMiddleware(history)];
     const originalReducers = {
         routing: routerReducer,
-        [key_home]: reducerHome
+        [key_home]: reducerHome,
+        [key_login]: reducerLogin
     }
     // const enhancers = [];
     const storeEnhancers = compose(resetEnhancer, applyMiddleware(...middleware), (window && window.devToolsExtension) ? window.devToolsExtension() : (f) => f)
-    const store = createStore(combineReducers(originalReducers), Immutable.Map({}), storeEnhancers);
+    const store = createStore(combineReducers(originalReducers), Immutable.fromJS({}), storeEnhancers);
     store._reducers = originalReducers;
     return store;
 }
