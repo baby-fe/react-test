@@ -37,6 +37,7 @@ class Footer extends Component{
 			if(i===this.props.page-1){
 				item.active = true
 			}
+			return item
 		})
 	}
 	componentWillMount(){

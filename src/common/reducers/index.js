@@ -3,9 +3,6 @@ import {
   createReducer
 } from 'redux-create-reducer';
 import Immutable from 'immutable';
-import {
-    key_login
-} from '@/constants'
 
 const initialState = Immutable.fromJS({});
 

@@ -22,7 +22,8 @@ export const auth = (WrappedComp) => {
     render(){
       console.log('auth:',this.props)
       if(!this.props.__state_login) {
-        return history.push(`/login`)
+        history.push(`/login`)
+        return null
       } else {
         return super.render();
       }
