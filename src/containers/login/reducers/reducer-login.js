@@ -7,7 +7,10 @@ import Immutable from 'immutable';
 const initialState = Immutable.fromJS({});
 
 const userlogin = (domain, action) => {
-	console.log(action)
+	console.log(domain)
+	domain.set('status',true)
+	domain.set('username',action.get('name'))
+
   return domain;
 };
 

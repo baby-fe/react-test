@@ -1,8 +1,7 @@
-import {press} from '../actionType'
+import {login} from '../actionType'
 import Immutable from 'immutable';
-import {post} from '@/service'
 
-export const login = (name, psw) => ({
-	type: press,
+export const userLogin = (name, psw) => ({
+	type: login,
 	data: Immutable.Map({name:name,psw:psw})
 });
