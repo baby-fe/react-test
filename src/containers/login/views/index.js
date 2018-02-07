@@ -21,9 +21,11 @@ class Login extends Component {
         console.log(this._name + this._psw)
         if(/\W+/.test(this._name)){
             alert('用户名不合法')
+            return 
         }
         this.props.userLogin(this._name, this._psw)
-        this.props.history.back();
+        console.log('history:',this.props.history)
+        this.props.history.goBack();
     }
     nameHandle(value){
         this._name = value

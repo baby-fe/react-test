@@ -1,5 +1,5 @@
 import React ,{Component}from 'react'
-import {Route, Redirect ,IndexRoute} from 'react-router'
+import {Route, Redirect, IndexRoute } from 'react-router'
 import Home from '@/containers/home/views'
 
 const moduleRoute  = require.context('./containers', true, /^\.\/\S+\/route\.js$/) //获取view视图下，所有router文件
@@ -15,7 +15,7 @@ class Root extends Component {
 }
 const router = store => {
     return <Route path="/" component={Root}>
-                <IndexRoute component={Home} />
+                <IndexRoute component={Home} onEnter={console.log('enterhome')}/>
                     {
                         moduleRoute.keys().map(key => {
                             return moduleRoute(key).default(store)
@@ -25,4 +25,5 @@ const router = store => {
 
             </Route>
 }
+
 export default router

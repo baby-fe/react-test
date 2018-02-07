@@ -18,13 +18,17 @@ import './css/reset.less'
 FastClick.attach(document.body)
 
 let history = process.env.NODE_ENV !== 'production' ? browserHistory : hashHistory;
-const immu_state = _storage.get([key_login]) && _storage.get([key_login]).accountId ? Immutable.fromJS({[key_login]:{status:true}}) : Immutable.fromJS({})
+const immu_state = _storage.get([key_login]) && _storage.get([key_login]).accountname ? Immutable.fromJS({[key_login]:{status:true}}) : Immutable.fromJS({})
 const store = createStore(immu_state, history);
 store.asyncReducers = {};
 const selectLocationState = (state) => {
 	return state.get('routing')
 }
 history = syncHistoryWithStore(history, store, {selectLocationState});
+// store.subscribe(() => {
+//     let state = store.getState()
+//     console.log('state:',state)
+// })
 
 ReactDOM.render(
 	<Provider store={store}>
