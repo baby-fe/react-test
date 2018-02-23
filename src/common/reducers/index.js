@@ -1,4 +1,4 @@
-import {login} from '../actionType'
+import {login,load_show,load_hide} from '../actionType'
 import {
   createReducer
 } from 'redux-create-reducer';
@@ -11,6 +11,17 @@ const userlogin = (domain, action) => {
   return domain;
 };
 
+const loading = (domain, action) => {
+	console.log('loading:',domain)
+  return domain;
+};
+
+const loadhide = (domain, action) => {
+	console.log('loadhide:',domain)
+  return domain;
+};
 export const reducerLogin = createReducer(initialState, {
-  [login]:userlogin
+  [login]:userlogin,
+  [load_show]:loading,
+  [load_hide]:loadhide
 });

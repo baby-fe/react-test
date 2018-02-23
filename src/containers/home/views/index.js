@@ -3,9 +3,11 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Swiper from '@/components/swiper'
 import Footer from '@/components/footer'
-import {getProducts} from '../actions/action-home'
+import {products,homeInfo} from '../actions/action-home'
+import {loading} from '@/common/actions'
 import selectorHome from '../selectors/selector-home'
 import { expansion, auth, compose } from '@/utils/hoc'
+import ProductItems from './productItem'
 import style from './home.less'
 
 export class Home extends Component {
@@ -27,12 +29,13 @@ export class Home extends Component {
         this.state.getHomeInfo()
     }
     handleSwiperClick(){
-        console.log('his:',this.props.history)
+        this.props.load()
+        // this.props.history.push(`/goods/1`)
     }
 
     render() {
         console.log('this.props:',this.props)
-        if(this.props.products.size<=0){
+        if(this.props.products.size<=0||this.props.sales.size<=0){
             return null
         }
         return <div className={style.home}>
@@ -43,8 +46,9 @@ export class Home extends Component {
                         })
                     }
                 </Swiper>
-        			<span className={style.btn}>home</span>
-        			<Link to="/test"><h2>to-test</h2></Link>
+        			
+                    
+                    <ProductItems products={this.props.sales}></ProductItems>
                     <Footer page={1}></Footer>
         		</div>
         		
@@ -54,8 +58,11 @@ export class Home extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getHomeInfo:() => {
-            // dispatch(getDetail())
-            dispatch(getProducts())
+            dispatch(products())
+            dispatch(homeInfo())
+        },
+        load:() => {
+            dispatch(loading())
         }
     }
 }

@@ -1,5 +1,3 @@
-export const login = 'LOGIN'
-
 export const fetch_failed = 'FETCH_FAILED'
 
 export const fetch_success = 'FETCH_SUCCESS'

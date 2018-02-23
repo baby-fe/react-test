@@ -1,4 +1,4 @@
-import React,{Component,Fragment} from 'react'
+import React,{Component} from 'react'
 import ReactSwipe from 'react-swipe'
 import style from './swiper.less'
 
@@ -34,7 +34,7 @@ class Swiper extends Component{
 			_paginations.push(<li key={i} className={`${style.swiperPagination} ${this.state.currentPage===i?style.swiperPaginationActive:'' }`}><i></i></li>)
 		}
 		return(
-			<Fragment>
+			<div className={`position_relative`}>
 				<ReactSwipe className={`${style.swiper} carousel`} swipeOptions={this.options} ref={(reactSwipe) => {this.reactSwipe=reactSwipe}}>
                     {
                         this.props.children
@@ -45,7 +45,7 @@ class Swiper extends Component{
 	                	_paginations
 	                }
                 </ul>
-            </Fragment>
+            </div>
 		)
 	}
 }

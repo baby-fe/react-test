@@ -12,6 +12,7 @@ import {
     key_login
 } from '@/constants'
 import './css/reset.less'
+import './css/base.less'
 
 // _storage.set([key_login],{accountId:1})
 // 全局处理移动端 onclick 事件的延迟 300 ms 问题

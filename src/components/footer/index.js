@@ -52,7 +52,7 @@ class Footer extends Component{
 				this.state.list.map((item, index) => {
 					return <div className={style.footerContainer} key={item.image}>
 								<img alt="" src={item.active?item.activedImage:item.image} className={style.footerContainerImg}/><br/>
-								<span className={style.footerContainerSpan}>{item.text}</span>
+								<span className={item.active?`${style.footerContainerSpan} fontColor_black`:style.footerContainerSpan }>{item.text}</span>
 							</div>
 				})
 			}

@@ -10,7 +10,7 @@ const homeSelector = (immu_state) => {
 };
 
 const bannerSelector = createSelector([homeSelector], (immu_home) => {
-  return immu_home&&immu_home.get('homeSale')
+  return immu_home&&immu_home.getIn(['homeSale','greatSale'])
 });
 
 const proSelector = createSelector([homeSelector], (immu_home) => {
@@ -20,7 +20,7 @@ const proSelector = createSelector([homeSelector], (immu_home) => {
 export default (immu_state) => {
   return {
   	__state_login: commonLoginSelector(immu_state),
-    banners: bannerSelector(immu_state) || Immutable.Map({}),
+    sales: bannerSelector(immu_state) || Immutable.Map({}),
     products: proSelector(immu_state) || Immutable.Map({}),
   };
 };

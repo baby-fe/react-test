@@ -18,3 +18,8 @@ export const key_test_inner = '@s_test_inner'
  * @type {String}
  */
 export const key_login = '@s_login'
+/**
+ * 详情页
+ * @type {String}
+ */
+export const key_goods = '@s_goods'
