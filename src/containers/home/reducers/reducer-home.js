@@ -7,7 +7,10 @@ import Immutable from 'immutable';
 const initialState = Immutable.fromJS({});
 
 const initHome = (domain, action) => {
-  return domain.set('homeSale',action.data);
+	return domain.withMutations(immu_item => {
+		immu_item.set('homeSale',action.homeData).set('products',action.proData)
+	})
+  // return domain.set('homeSale',action.data);
 };
 
 const initPros = (domain, action) => {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Swiper from '@/components/swiper'
 import Footer from '@/components/footer'
+import Loading from '@/components/loading'
 import {products,homeInfo} from '../actions/action-home'
 import {loading} from '@/common/actions'
 import selectorHome from '../selectors/selector-home'
@@ -58,7 +59,7 @@ export class Home extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getHomeInfo:() => {
-            dispatch(products())
+            // dispatch(products())
             dispatch(homeInfo())
         },
         load:() => {
