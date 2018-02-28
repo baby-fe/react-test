@@ -5,6 +5,21 @@
 	color: #000;
 	padding: 0 0.133333rem;
 }
+:global(.fade_in){
+	animation-duration: 1s;
+  	animation-fill-mode: both;
+  	animation-iteration-count: 1;
+  	animation-name: fadeIn;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
 /**
  * common font color style
  * @param  {[type]} .fontColor_black [description]
