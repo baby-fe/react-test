@@ -15,10 +15,11 @@ export class Goods extends Component {
 	}
 
 	componentDidMount() {
-        
+        console.log('mounted')
 	}
 
     componentWillMount(){
+        console.log('mount')
         this.state.getProductDetail(this.props.params.id)
     }
     handleSwiperClick(){

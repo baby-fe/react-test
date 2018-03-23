@@ -16,7 +16,6 @@ export class Home extends Component {
 	constructor(props){
 		super(props)
 		this.state = {...props}
-        console.log('style:',style)
         this.handleSwiperClick = this.handleSwiperClick.bind(this)
 	}
 
@@ -35,7 +34,6 @@ export class Home extends Component {
     }
 
     render() {
-        console.log('this.props:',this.props)
         if(this.props.products.size<=0||this.props.sales.size<=0){
             return null
         }
