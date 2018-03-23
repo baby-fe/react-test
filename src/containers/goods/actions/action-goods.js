@@ -3,11 +3,12 @@ import Immutable from 'immutable';
 import {post} from '@/service'
 import goods from '@/mock/goodDetail'
 
-export const setDetail = (res) => ({
+export const setDetailAction = (res) => ({
 	type: getDetail,
 	data: Immutable.fromJS(res)
 });
 
-export const getProducts = (par) => (dispatch, getState) => {
-	dispatch(setDetail(goods));
-}
+export const getProDetailAction = (id) => ({
+	type: getDetail,
+	data: id
+});

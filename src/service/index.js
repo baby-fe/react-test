@@ -16,35 +16,84 @@ param.cache = 'reload';
 param.mode = 'same-origin';
 
 export const request = (url, data, option = {}) => {
-  return new Promise((resolve, reject) => {
-    data = data || {};
-    url = API_PATH + url;
-  	switch (option&&option.method.toLocaleLowerCase()){
-  		case 'get':
-  			url = url+'?'+formDataCode(data);
-        break;
-  		case 'post':
-        option.body = formDataCode(data);
-  			option.headers = {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'};
-        break;
-  		default:
-        url = url+'?'+formDataCode(data);
-        break;
-  	}
+  data = data || {};
+  url = API_PATH + url;
+	switch (option&&option.method.toLocaleLowerCase()){
+		case 'get':
+			url = url+'?'+formDataCode(data);
+      break;
+		case 'post':
+      option.body = formDataCode(data);
+			option.headers = {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'};
+      break;
+		default:
+      url = url+'?'+formDataCode(data);
+      break;
+	}
 
-  	fetch(url,{...param,...option}).then(response => {
+  return new Promise((resolve, reject) => {
+    Promise.race([
+      fetch(url,{...param,...option}),
+      new Promise((resolve, reject) => {
+        setTimeout(() => reject(console.warn('request timeout')), option.timeout ? option.timeout : 3 * 1000);
+      })
+    ]).then(response => {
       if (response.ok) {
         return response.json();
       } else {
-        reject({status:response.status})
+        resolve({status:response.status})
       }
     }).then(response => {
       resolve(response);
     }).catch(err => {
-      console.log('err:',err)
-      reject({status:-1});
+      resolve({status:-1});
     })
   })
+
+  // return Promise.race([
+  //   new Promise((resolve, reject) => {
+  //     fetch(url,{...param,...option}).then(response => {
+  //       if (response.ok) {
+  //         return response.json();
+  //       } else {
+  //         reject({status:response.status})
+  //       }
+  //     }).then(response => {
+  //       resolve(response);
+  //     }).catch(err => {
+  //       reject({status:-1});
+  //     })
+  //   }),
+  //   new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       // console.warn('request timeout')
+  //       reject(console.warn('request timeout'))
+  //   }, option.timeout ? option.timeout : 3 * 1000);
+  //   })
+  // ]).then(res => {
+  //   console.log('::',res)
+  // })
+
+  // return new Promise((resolve, reject) => {
+  //   Promise.race([
+  //     fetch(url,{...param,...option}),
+  //     new Promise((resolve, reject) => {
+  //       setTimeout(() => reject(new Error('request timeout')), option.timeout ? option.timeout : 3 * 1000);
+  //     })]).then(response => {
+  //     console.log('response:',response)
+  //     if (response.ok) {
+  //       return response.json();
+  //     } else {
+  //       console.log('reject:',response)
+  //       reject({status:response.status})
+  //     }
+  //   }).then(response => {
+  //     resolve(response);
+  //   }).catch(err => {
+  //     console.log('err:',err)
+  //     reject({status:-1});
+  //   })
+  // })
 }
 
 //todo

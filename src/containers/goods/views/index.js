@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Swiper from '@/components/swiper'
-import {getProducts} from '../actions/action-goods'
+import {getProDetailAction} from '../actions/action-goods'
 import selectorGoods from '../selectors/selector-goods'
 import { expansion, auth, compose } from '@/utils/hoc'
 import style from './goods_detail.less'
@@ -11,25 +11,21 @@ export class Goods extends Component {
 	constructor(props){
 		super(props)
 		this.state = {...props}
-        console.log('style:',style)
         this.handleSwiperClick = this.handleSwiperClick.bind(this)
 	}
 
 	componentDidMount() {
         
-        
 	}
 
     componentWillMount(){
-        // this.state
-        this.state.getProductDetail()
+        this.state.getProductDetail(this.props.params.id)
     }
     handleSwiperClick(){
-        console.log('his:',this.props.history)
     }
 
     render() {
-        console.log('this.props:',this.props.banners)
+        console.log('render')
         if(!this.props.banners) return null
         return <div className={style.home}>
                     <Swiper opts={{continuous: false,pagination:true,sum:this.props.banners.size}}>
@@ -46,8 +42,8 @@ export class Goods extends Component {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        getProductDetail:() => {
-            dispatch(getProducts())
+        getProductDetail:(id) => {
+            dispatch(getProDetailAction(id))
         }
     }
 }

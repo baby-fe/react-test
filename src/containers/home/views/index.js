@@ -49,7 +49,7 @@ export class Home extends Component {
                 </Swiper>
         			
                     
-                    <ProductItems products={this.props.sales}></ProductItems>
+                    <ProductItems products={this.props.sales} history={this.props.history}></ProductItems>
                     <Footer page={1}></Footer>
         		</div>
         		

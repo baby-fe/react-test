@@ -10,6 +10,7 @@ export class ProductItems extends Component {
 	constructor(props){
 		super(props)
 		this.state = {...props}
+        this.clickHandler = this.clickHandler.bind(this)
 	}
 
 	componentDidMount() {
@@ -19,13 +20,16 @@ export class ProductItems extends Component {
 
     componentWillMount(){
     }
-    
+
+    clickHandler(id){
+        this.props.history.push(`/goods/${id}`)
+    }
 
     render() {
         // const placeholderImg = require(`@/images/loading.png`)
-        return <div className={style.productWrapper}>{
+        return <div className={style.productWrapper} >{
                         this.state.products.map((immu_item, index) => {
-                            return <div className={style.productItem} key={index}>
+                            return <div className={style.productItem} key={index} onClick={() => { this.clickHandler(108522) }}>
                                         <LazyLoad height={100} placeholder={<PlaceHolderImg/>} offset={-300}>
                                         <img className={style.productItemImg} src={immu_item.get('image')} alt={`product_img`}/>
                                         </LazyLoad>

@@ -3,7 +3,9 @@ import { combineReducers } from 'redux-immutable'
 import { Route } from 'react-router'
 import Immutable from 'immutable';
 import reducerGoods from './reducers/reducer-goods'
-import { key_goods} from '@/constants'
+import { key_goods } from '@/constants'
+import { sagaMiddleware } from '@/store'
+import productSagas from './productSagas'
 
 const loader = (store, nextState, cb, module, key, rdcr) => {
     if(key && rdcr){
@@ -16,6 +18,7 @@ const loader = (store, nextState, cb, module, key, rdcr) => {
 
 const goodsLoader = (store, nextState, cb) => {
     import('./views/index').then(module => {
+        sagaMiddleware.run(productSagas)
         loader(store, nextState, cb, module, key_goods, reducerGoods)
     })
 }

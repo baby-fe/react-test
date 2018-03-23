@@ -1,4 +1,4 @@
-import {getDetail} from '../actionType'
+import {getDetail,setDetail} from '../actionType'
 import {
   createReducer
 } from 'redux-create-reducer';
@@ -11,5 +11,5 @@ const initDetail = (domain, action) => {
 };
 
 export default createReducer(initialState, {
-  [getDetail]:initDetail
+  [setDetail]:initDetail
 });

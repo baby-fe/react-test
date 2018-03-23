@@ -87,7 +87,8 @@ module.exports = function(proxy, allowedHost) {
     public: allowedHost,
     proxy:{
       "/api": {
-          target: "https://test.51bushou.com",
+          // target: "https://test.51bushou.com",
+          target: 'http://101.37.27.14:9003', // 二套
           secure: false,
           pathRewrite: {"^/api" : ""},
           changeOrigin : true
