@@ -26,10 +26,10 @@ const selectLocationState = (state) => {
 	return state.get('routing')
 }
 history = syncHistoryWithStore(history, store, {selectLocationState});
-// store.subscribe(() => {
-//     let state = store.getState()
-//     console.log('state:',state)
-// })
+store.subscribe((a, b) => {
+    let state = store.getState()
+    console.log('a:',a)
+})
 
 ReactDOM.render(
 	<Provider store={store}>

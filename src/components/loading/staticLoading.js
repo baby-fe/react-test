@@ -6,6 +6,7 @@ let StaticLoading = {
 	default:() => {
 		let _div = document.createElement('div')
     	document.body.appendChild(_div)
+    	_div.className = 'loadingComp'
     	_div.style.width = '100%'
     	_div.style.height = '100%'
     	ReactDOM.render((
@@ -17,6 +18,10 @@ let StaticLoading = {
 		StaticLoading.default()
 	},
 	remove:() => {
+		// const nodes = document.querySelectorAll('.loadingComp')
+		// nodes.forEach(node => {
+		// 	StaticLoading.instance && document.body.removeChild(node)
+		// })
 		StaticLoading.instance && document.body.removeChild(StaticLoading.instance)
 	},
 	instance:undefined

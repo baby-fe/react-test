@@ -15,18 +15,15 @@ export class Goods extends Component {
 	}
 
 	componentDidMount() {
-        console.log('mounted')
 	}
 
     componentWillMount(){
-        console.log('mount')
         this.state.getProductDetail(this.props.params.id)
     }
     handleSwiperClick(){
     }
 
     render() {
-        console.log('render')
         if(!this.props.banners) return null
         return <div className={style.home}>
                     <Swiper opts={{continuous: false,pagination:true,sum:this.props.banners.size}}>

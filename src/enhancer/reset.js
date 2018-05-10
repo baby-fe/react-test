@@ -21,4 +21,8 @@ const reset = (createStore) => (reducer, preloadedState, enhancer) => {
         reset
     }
 }
-export default reset;
+ const logAction = store => next => action => {
+    console.log('action enhancer:',action)
+    next(action)
+ }
+export  {reset,logAction};

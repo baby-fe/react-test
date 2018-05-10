@@ -1,10 +1,10 @@
-import {getDetail} from '../actionType'
+import {getDetail,setDetail} from '../actionType'
 import Immutable from 'immutable';
 import {post} from '@/service'
 import goods from '@/mock/goodDetail'
 
 export const setDetailAction = (res) => ({
-	type: getDetail,
+	type: setDetail,
 	data: Immutable.fromJS(res)
 });
 
